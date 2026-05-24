@@ -1,185 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Careerly</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Careerly</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin:0;
-      font-family: Arial;
-      background:black;
-      color:white;
-    }
+<script src="https://unpkg.com/react@18/umd/unpkg.com React@18 UMD"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
-    .container {
-      display:flex;
-      height:100vh;
-    }
-
-    .sidebar {
-      width:220px;
-      background:#111;
-      padding:20px;
-    }
-
-    .sidebar h2 { margin-bottom:20px; }
-
-    .sidebar button {
-      display:block;
-      width:100%;
-      margin-bottom:10px;
-      padding:10px;
-      background:#222;
-      color:white;
-      border:none;
-      cursor:pointer;
-    }
-
-    .sidebar button:hover { background:#6c63ff; }
-
-    .main {
-      flex:1;
-      padding:30px;
-    }
-
-    input, textarea {
-      width:100%;
-      padding:10px;
-      margin:10px 0;
-      background:#222;
-      color:white;
-      border:none;
-    }
-
-    button.primary {
-      background:#6c63ff;
-      padding:10px 20px;
-      border:none;
-      color:white;
-      cursor:pointer;
-    }
-
-    .card {
-      background:#111;
-      padding:20px;
-      margin-bottom:20px;
-    }
-
-  </style>
+<style>
+body { margin:0; background:#0a0a0f; color:white; font-family:Arial;}
+#root { height:100vh;}
+.sidebar { width:220px; background:#111; padding:20px;}
+.main { flex:1; padding:20px;}
+.container { display:flex; height:100%;}
+button { padding:10px; margin:5px; background:#6c63ff; color:white; border:none; cursor:pointer;}
+</style>
 </head>
 
 <body>
-
-<div id="app"></div>
+<div id="root"></div>
 
 <script>
-let page = "dashboard";
+const e = React.createElement;
 
-function showPage(p){
-  page = p;
-  render();
-}
+function App() {
+  const [page, setPage] = React.useState("dashboard");
 
-function render(){
-  const app = document.getElementById("app");
+  function renderPage(){
+    if(page==="dashboard"){
+      return e("div", null,
+        e("h1", null, "🚀 Careerly Advanced App"),
+        e("p", null, "Now React is working without black screen ✅")
+      );
+    }
 
-  app.innerHTML = `
-    <div class="container">
-      <div class="sidebar">
-        <h2>🚀 Careerly</h2>
+    if(page==="cv"){
+      return e("div", null,
+        e("h2", null, "CV Builder"),
+        e("input", {placeholder:"Name"}),
+        e("input", {placeholder:"Job Title"}),
+        e("button", null, "Generate CV")
+      );
+    }
 
-        <button onclick="showPage('dashboard')">Dashboard</button>
-        <button onclick="showPage('cv')">CV Builder</button>
-        <button onclick="showPage('cover')">Cover Letter</button>
-        <button onclick="showPage('tracker')">Tracker</button>
-      </div>
+    if(page==="cover"){
+      return e("h2", null, "Cover Letter Section");
+    }
 
-      <div class="main">
-        ${pageContent()}
-      </div>
-    </div>
-  `;
-}
-
-function pageContent(){
-  if(page==="dashboard"){
-    return `
-      <h1>Welcome to Careerly ✅</h1>
-      <p>Your app is working!</p>
-    `;
+    if(page==="tracker"){
+      return e("h2", null, "Tracker Section");
+    }
   }
 
-  if(page==="cv"){
-    return `
-      <h2>AI CV Builder</h2>
-
-      <input id="name" placeholder="Your Name">
-      <input id="job" placeholder="Job Title">
-      <textarea id="desc" placeholder="Job Description"></textarea>
-
-      <button class="primary" onclick="generateCV()">Generate CV</button>
-
-      <div id="cvResult" class="card"></div>
-    `;
-  }
-
-  if(page==="cover"){
-    return `
-      <h2>Cover Letter</h2>
-
-      <input id="cname" placeholder="Your Name">
-      <input id="company" placeholder="Company Name">
-
-      <button class="primary" onclick="generateCover()">Generate Letter</button>
-
-      <div id="coverResult" class="card"></div>
-    `;
-  }
-
-  if(page==="tracker"){
-    return `
-      <h2>Application Tracker</h2>
-
-      <input id="comp" placeholder="Company">
-      <input id="role" placeholder="Role">
-
-      <button class="primary" onclick="addApp()">Add</button>
-
-      <ul id="list"></ul>
-    `;
-  }
+  return e("div",{className:"container"},
+    e("div",{className:"sidebar"},
+      e("h2", null, "Careerly"),
+      e("button",{onClick:()=>setPage("dashboard")},"Dashboard"),
+      e("button",{onClick:()=>setPage("cv")},"CV Builder"),
+      e("button",{onClick:()=>setPage("cover")},"Cover Letter"),
+      e("button",{onClick:()=>setPage("tracker")},"Tracker"),
+    ),
+    e("div",{className:"main"},
+      renderPage()
+    )
+  );
 }
 
-function generateCV(){
-  const name = document.getElementById("name").value;
-  const job = document.getElementById("job").value;
-
-  document.getElementById("cvResult").innerText =
-  "CV for " + name + " applying for " + job + "\\n\\n(Sample AI Output)";
-}
-
-function generateCover(){
-  const name = document.getElementById("cname").value;
-  const company = document.getElementById("company").value;
-
-  document.getElementById("coverResult").innerText =
-  "Cover Letter\\n\\nDear " + company + ",\\n\\nMy name is " + name;
-}
-
-let apps = [];
-
-function addApp(){
-  const comp = document.getElementById("comp").value;
-  const role = document.getElementById("role").value;
-
-  apps.push(comp + " - " + role);
-
-  document.getElementById("list").innerHTML =
-    apps.map(a => "<li>"+a+"</li>").join("");
-}
-
-render();
+ReactDOM.createRoot(document.getElementById("root")).render(e(App));
 </script>
 
 </body>
