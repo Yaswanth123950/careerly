@@ -1,1178 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Careerly — AI Career Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --bg:#0a0a0f;
-  --bg2:#111118;
-  --bg3:#1a1a24;
-  --card:#16161f;
-  --border:#2a2a38;
-  --accent:#6c63ff;
-  --accent2:#ff6584;
-  --accent3:#43e8b0;
-  --text:#f0f0f8;
-  --text2:#9090b0;
-  --text3:#5a5a7a;
-  --success:#43e8b0;
-  --warn:#ffb547;
-  --danger:#ff6584;
-  --font-head:'Syne',sans-serif;
-  --font-body:'DM Sans',sans-serif;
-  --radius:14px;
-  --radius-sm:8px;
-}
-html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.6;overflow:hidden;}
-#root{display:flex;height:100vh;}
+  <title>Careerly</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-/* SIDEBAR */
-.sidebar{width:240px;min-width:240px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:0;overflow:hidden;}
-.logo{padding:24px 20px 20px;border-bottom:1px solid var(--border);}
-.logo-mark{display:flex;align-items:center;gap:10px;}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:800;font-size:16px;color:#fff;}
-.logo-text{font-family:var(--font-head);font-size:20px;font-weight:800;color:var(--text);}
-.logo-sub{font-size:11px;color:var(--text3);margin-top:2px;letter-spacing:0.05em;}
-.nav{flex:1;padding:12px 10px;overflow-y:auto;}
-.nav-section{font-size:10px;font-weight:600;letter-spacing:0.12em;color:var(--text3);padding:8px 10px 4px;text-transform:uppercase;}
-.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius-sm);cursor:pointer;color:var(--text2);font-size:14px;font-weight:400;margin-bottom:2px;transition:all 0.15s;border:1px solid transparent;}
-.nav-item:hover{background:var(--bg3);color:var(--text);}
-.nav-item.active{background:linear-gradient(135deg,rgba(108,99,255,0.15),rgba(255,101,132,0.08));color:var(--text);border-color:rgba(108,99,255,0.3);}
-.nav-item.active .nav-icon{color:var(--accent);}
-.nav-icon{font-size:16px;width:18px;text-align:center;}
-.nav-badge{margin-left:auto;background:var(--accent);color:#fff;font-size:10px;font-weight:600;padding:1px 6px;border-radius:99px;}
-.sidebar-footer{padding:14px;border-top:1px solid var(--border);}
-.user-card{display:flex;align-items:center;gap:10px;padding:10px;border-radius:var(--radius-sm);background:var(--bg3);}
-.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:13px;color:#fff;flex-shrink:0;}
-.user-info{flex:1;min-width:0;}
-.user-name{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.user-plan{font-size:11px;color:var(--accent);font-weight:500;}
-.owner-badge{font-size:10px;background:linear-gradient(90deg,#FFD700,#FFA500);color:#000;padding:2px 6px;border-radius:99px;font-weight:700;margin-left:4px;}
+  <style>
+    body {
+      margin:0;
+      font-family: Arial;
+      background:black;
+      color:white;
+    }
 
-/* MAIN */
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);}
-.topbar{height:60px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:16px;flex-shrink:0;}
-.page-title{font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--text);flex:1;}
-.topbar-actions{display:flex;align-items:center;gap:10px;}
-.content{flex:1;overflow-y:auto;padding:24px;}
+    .container {
+      display:flex;
+      height:100vh;
+    }
 
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:13px;font-weight:500;cursor:pointer;border:none;transition:all 0.15s;text-decoration:none;}
-.btn-primary{background:var(--accent);color:#fff;}
-.btn-primary:hover{background:#7c73ff;transform:translateY(-1px);}
-.btn-secondary{background:var(--bg3);color:var(--text2);border:1px solid var(--border);}
-.btn-secondary:hover{background:var(--card);color:var(--text);}
-.btn-success{background:rgba(67,232,176,0.15);color:var(--accent3);border:1px solid rgba(67,232,176,0.3);}
-.btn-danger{background:rgba(255,101,132,0.12);color:var(--danger);border:1px solid rgba(255,101,132,0.3);}
-.btn-sm{padding:6px 12px;font-size:12px;}
-.btn-lg{padding:12px 24px;font-size:15px;}
-.btn:disabled{opacity:0.5;cursor:not-allowed;transform:none!important;}
+    .sidebar {
+      width:220px;
+      background:#111;
+      padding:20px;
+    }
 
-/* CARDS */
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;}
-.card-sm{padding:14px 16px;}
-.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
-.card-title{font-family:var(--font-head);font-size:15px;font-weight:600;color:var(--text);}
+    .sidebar h2 { margin-bottom:20px; }
 
-/* GRID */
-.grid{display:grid;gap:16px;}
-.grid-2{grid-template-columns:repeat(2,1fr);}
-.grid-3{grid-template-columns:repeat(3,1fr);}
-.grid-4{grid-template-columns:repeat(4,1fr);}
+    .sidebar button {
+      display:block;
+      width:100%;
+      margin-bottom:10px;
+      padding:10px;
+      background:#222;
+      color:white;
+      border:none;
+      cursor:pointer;
+    }
 
-/* STAT CARDS */
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;}
-.stat-label{font-size:12px;color:var(--text3);font-weight:500;letter-spacing:0.04em;margin-bottom:6px;}
-.stat-value{font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--text);line-height:1;}
-.stat-change{font-size:12px;margin-top:6px;}
-.stat-up{color:var(--success);}
-.stat-down{color:var(--danger);}
-.stat-accent{border-top:3px solid var(--accent);}
-.stat-accent2{border-top:3px solid var(--accent2);}
-.stat-accent3{border-top:3px solid var(--accent3);}
-.stat-warn{border-top:3px solid var(--warn);}
+    .sidebar button:hover { background:#6c63ff; }
 
-/* BADGES */
-.badge{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:3px 8px;border-radius:99px;}
-.badge-purple{background:rgba(108,99,255,0.15);color:var(--accent);}
-.badge-green{background:rgba(67,232,176,0.12);color:var(--accent3);}
-.badge-red{background:rgba(255,101,132,0.12);color:var(--danger);}
-.badge-warn{background:rgba(255,181,71,0.12);color:var(--warn);}
-.badge-gray{background:var(--bg3);color:var(--text2);}
+    .main {
+      flex:1;
+      padding:30px;
+    }
 
-/* INPUTS */
-.input-group{margin-bottom:14px;}
-.input-label{font-size:12px;font-weight:500;color:var(--text2);margin-bottom:6px;display:block;}
-input[type=text],input[type=email],input[type=password],textarea,select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;color:var(--text);font-family:var(--font-body);font-size:14px;outline:none;transition:border 0.15s;}
-input:focus,textarea:focus,select:focus{border-color:var(--accent);}
-textarea{resize:vertical;min-height:80px;}
-select option{background:var(--bg2);}
+    input, textarea {
+      width:100%;
+      padding:10px;
+      margin:10px 0;
+      background:#222;
+      color:white;
+      border:none;
+    }
 
-/* TABS */
-.tabs{display:flex;gap:4px;background:var(--bg3);padding:4px;border-radius:var(--radius-sm);margin-bottom:20px;width:fit-content;}
-.tab{padding:7px 16px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;color:var(--text2);transition:all 0.15s;}
-.tab.active{background:var(--card);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,0.3);}
+    button.primary {
+      background:#6c63ff;
+      padding:10px 20px;
+      border:none;
+      color:white;
+      cursor:pointer;
+    }
 
-/* PROGRESS */
-.progress{height:4px;background:var(--bg3);border-radius:99px;overflow:hidden;}
-.progress-bar{height:100%;border-radius:99px;transition:width 0.4s;}
-.progress-purple{background:var(--accent);}
-.progress-green{background:var(--accent3);}
-.progress-warn{background:var(--warn);}
-.progress-red{background:var(--danger);}
+    .card {
+      background:#111;
+      padding:20px;
+      margin-bottom:20px;
+    }
 
-/* TABLE */
-.table{width:100%;border-collapse:collapse;}
-.table th{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.06em;padding:8px 12px;text-align:left;border-bottom:1px solid var(--border);}
-.table td{padding:10px 12px;border-bottom:1px solid rgba(42,42,56,0.5);font-size:13px;color:var(--text2);}
-.table tr:last-child td{border-bottom:none;}
-.table tr:hover td{background:rgba(255,255,255,0.02);}
-
-/* AI RESPONSE */
-.ai-response{background:linear-gradient(135deg,rgba(108,99,255,0.08),rgba(67,232,176,0.05));border:1px solid rgba(108,99,255,0.2);border-radius:var(--radius);padding:20px;margin-top:16px;position:relative;overflow:hidden;}
-.ai-response::before{content:'✦ AI Generated';position:absolute;top:10px;right:14px;font-size:10px;font-weight:600;color:var(--accent);letter-spacing:0.05em;}
-.ai-response pre{white-space:pre-wrap;font-family:var(--font-body);font-size:14px;line-height:1.8;color:var(--text);}
-
-/* SPINNER */
-.spinner{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
-
-/* MODAL */
-.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:100;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
-.modal{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:28px;width:500px;max-width:90vw;max-height:90vh;overflow-y:auto;position:relative;}
-.modal-close{position:absolute;top:16px;right:16px;background:var(--bg3);border:none;color:var(--text2);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
-.modal-close:hover{background:var(--border);color:var(--text);}
-
-/* SCROLLBAR */
-::-webkit-scrollbar{width:5px;}
-::-webkit-scrollbar-track{background:transparent;}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px;}
-::-webkit-scrollbar-thumb:hover{background:var(--text3);}
-
-/* ANIMATIONS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-.fade-up{animation:fadeUp 0.3s ease forwards;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.5;}}
-.pulse{animation:pulse 1.5s ease infinite;}
-
-/* DIVIDER */
-.divider{height:1px;background:var(--border);margin:16px 0;}
-
-/* EMPTY STATE */
-.empty{text-align:center;padding:40px 20px;}
-.empty-icon{font-size:40px;margin-bottom:12px;opacity:0.3;}
-.empty-text{color:var(--text3);font-size:14px;}
-
-/* SECTION HERO */
-.section-hero{background:linear-gradient(135deg,rgba(108,99,255,0.1),rgba(67,232,176,0.05));border:1px solid rgba(108,99,255,0.15);border-radius:var(--radius);padding:24px;margin-bottom:20px;position:relative;overflow:hidden;}
-.section-hero::after{content:'';position:absolute;right:-60px;top:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(108,99,255,0.1) 0%,transparent 70%);pointer-events:none;}
-
-/* INTERVIEW Q CARD */
-.q-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:10px;}
-.q-type{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;}
-.q-text{font-size:14px;color:var(--text);line-height:1.6;}
-.q-actions{margin-top:10px;display:flex;gap:8px;}
-
-/* MATCH SCORE */
-.match-ring{position:relative;display:inline-flex;align-items:center;justify-content:center;width:50px;height:50px;}
-.match-ring svg{position:absolute;top:0;left:0;transform:rotate(-90deg);}
-.match-num{font-family:var(--font-head);font-size:13px;font-weight:800;position:relative;z-index:1;}
-
-/* PLAN CARDS */
-.plan-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;position:relative;transition:all 0.2s;}
-.plan-card:hover{transform:translateY(-3px);border-color:var(--accent);}
-.plan-card.featured{border-color:var(--accent);background:linear-gradient(135deg,rgba(108,99,255,0.1),rgba(108,99,255,0.05));}
-.plan-popular{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:99px;white-space:nowrap;}
-.plan-price{font-family:var(--font-head);font-size:36px;font-weight:800;color:var(--text);line-height:1;margin:12px 0 4px;}
-.plan-period{font-size:12px;color:var(--text3);}
-.plan-features{text-align:left;margin:16px 0;list-style:none;}
-.plan-features li{font-size:13px;color:var(--text2);padding:5px 0;display:flex;align-items:center;gap:8px;}
-.plan-features li::before{content:'✓';color:var(--accent3);font-weight:700;font-size:12px;}
-</style>
+  </style>
 </head>
+
 <body>
-<div id="root"></div>
 
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<div id="app"></div>
 
-<script type="text/babel">
-const {useState, useEffect, useCallback, useRef} = React;
+<script>
+let page = "dashboard";
 
-// ── CONFIG ──────────────────────────────────────────────────────────────────
-const OWNER_EMAIL = 'yaswanth@careerly.co.uk';
-const OWNER_PASS  = 'Careerly@Owner2025';
-const API_KEY     = 'YOUR_ANTHROPIC_API_KEY'; // ← paste your key here
+function showPage(p){
+  page = p;
+  render();
+}
 
-// ── AI HELPER ───────────────────────────────────────────────────────────────
-async function askAI(prompt, systemPrompt = '') {
-  if (API_KEY === 'YOUR_ANTHROPIC_API_KEY') {
-    await new Promise(r => setTimeout(r, 1200));
-    return `[Demo Mode] Add your Anthropic API key to unlock real AI.\n\nReplace YOUR_ANTHROPIC_API_KEY in the code with your key from console.anthropic.com\n\nPrompt received: ${prompt.slice(0, 100)}...`;
+function render(){
+  const app = document.getElementById("app");
+
+  app.innerHTML = `
+    <div class="container">
+      <div class="sidebar">
+        <h2>🚀 Careerly</h2>
+
+        <button onclick="showPage('dashboard')">Dashboard</button>
+        <button onclick="showPage('cv')">CV Builder</button>
+        <button onclick="showPage('cover')">Cover Letter</button>
+        <button onclick="showPage('tracker')">Tracker</button>
+      </div>
+
+      <div class="main">
+        ${pageContent()}
+      </div>
+    </div>
+  `;
+}
+
+function pageContent(){
+  if(page==="dashboard"){
+    return `
+      <h1>Welcome to Careerly ✅</h1>
+      <p>Your app is working!</p>
+    `;
   }
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json', 'x-api-key': API_KEY, 'anthropic-version': '2023-06-01'},
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 2000,
-      system: systemPrompt || 'You are Careerly AI, an expert career coach and professional writer. Be specific, practical and professional.',
-      messages: [{role: 'user', content: prompt}]
-    })
-  });
-  const data = await res.json();
-  return data.content?.[0]?.text || 'Error generating response.';
+
+  if(page==="cv"){
+    return `
+      <h2>AI CV Builder</h2>
+
+      <input id="name" placeholder="Your Name">
+      <input id="job" placeholder="Job Title">
+      <textarea id="desc" placeholder="Job Description"></textarea>
+
+      <button class="primary" onclick="generateCV()">Generate CV</button>
+
+      <div id="cvResult" class="card"></div>
+    `;
+  }
+
+  if(page==="cover"){
+    return `
+      <h2>Cover Letter</h2>
+
+      <input id="cname" placeholder="Your Name">
+      <input id="company" placeholder="Company Name">
+
+      <button class="primary" onclick="generateCover()">Generate Letter</button>
+
+      <div id="coverResult" class="card"></div>
+    `;
+  }
+
+  if(page==="tracker"){
+    return `
+      <h2>Application Tracker</h2>
+
+      <input id="comp" placeholder="Company">
+      <input id="role" placeholder="Role">
+
+      <button class="primary" onclick="addApp()">Add</button>
+
+      <ul id="list"></ul>
+    `;
+  }
 }
 
-// ── DATA ─────────────────────────────────────────────────────────────────────
-const SAMPLE_APPS = [
-  {id:1,company:'Google',role:'Senior Software Engineer',status:'Interview',date:'2025-05-18',match:94,country:'UK'},
-  {id:2,company:'Spotify',role:'Product Designer',status:'Applied',date:'2025-05-15',match:82,country:'UK'},
-  {id:3,company:'Amazon',role:'Data Scientist',status:'Rejected',date:'2025-05-10',match:67,country:'UK'},
-  {id:4,company:'Meta',role:'ML Engineer',status:'Offer',date:'2025-05-08',match:91,country:'US'},
-  {id:5,company:'Revolut',role:'Backend Engineer',status:'Applied',date:'2025-05-20',match:88,country:'UK'},
-];
+function generateCV(){
+  const name = document.getElementById("name").value;
+  const job = document.getElementById("job").value;
 
-const COUNTRIES = ['UK','US','Germany','India','UAE','Canada','Australia','Singapore','France','Netherlands'];
-const STATUS_OPTIONS = ['Applied','Interview','Offer','Rejected','Saved'];
-const PLANS = [
-  {name:'Free',price:'£0',period:'/month',features:['5 AI CVs per month','3 Cover Letters','Basic Tracker (10 apps)','Email support'],btn:'Current Plan',featured:false},
-  {name:'Starter',price:'£12',period:'/month',features:['25 AI CVs per month','Unlimited Cover Letters','Full Tracker','Interview Prep (5/mo)','Priority support'],btn:'Upgrade',featured:false,stripeLink:'#'},
-  {name:'Pro',price:'£29',period:'/month',features:['Unlimited AI CVs','Unlimited Cover Letters','Full Tracker','Unlimited Interview Prep','LinkedIn Agent','Analytics Dashboard'],btn:'Upgrade to Pro',featured:true,stripeLink:'#'},
-  {name:'Elite',price:'£59',period:'/month',features:['Everything in Pro','1-on-1 Career Coaching (2hr/mo)','Resume Review by Expert','Job Guarantee Support','White-glove onboarding'],btn:'Go Elite',featured:false,stripeLink:'#'},
-];
-
-// ── ICONS ────────────────────────────────────────────────────────────────────
-const Icon = ({name, size=16, style={}}) => {
-  const icons = {
-    dashboard:'⊞', cv:'📄', cover:'✉️', tracker:'📊', interview:'🎯',
-    linkedin:'💼', pricing:'💳', settings:'⚙️', search:'🔍', plus:'＋',
-    ai:'✦', check:'✓', star:'★', crown:'👑', user:'👤', out:'↗',
-    warn:'⚠', refresh:'↺', copy:'⎘', send:'→', home:'⌂', briefcase:'💼',
-    bell:'🔔', chart:'📈', rocket:'🚀', globe:'🌍', lock:'🔒', menu:'☰'
-  };
-  return <span style={{fontSize:size,...style}} aria-hidden="true">{icons[name]||'●'}</span>;
-};
-
-// ── MATCH RING ───────────────────────────────────────────────────────────────
-const MatchRing = ({score}) => {
-  const color = score>=85?'#43e8b0':score>=65?'#ffb547':'#ff6584';
-  const r=20, circ=2*Math.PI*r;
-  const dash = (score/100)*circ;
-  return (
-    <div className="match-ring">
-      <svg width="50" height="50" viewBox="0 0 50 50">
-        <circle cx="25" cy="25" r={r} fill="none" stroke="#2a2a38" strokeWidth="4"/>
-        <circle cx="25" cy="25" r={r} fill="none" stroke={color} strokeWidth="4"
-          strokeDasharray={`${dash} ${circ-dash}`} strokeLinecap="round"/>
-      </svg>
-      <span className="match-num" style={{color}}>{score}%</span>
-    </div>
-  );
-};
-
-// ── STATUS BADGE ─────────────────────────────────────────────────────────────
-const StatusBadge = ({status}) => {
-  const m = {Applied:'badge-purple',Interview:'badge-warn',Offer:'badge-green',Rejected:'badge-red',Saved:'badge-gray'};
-  return <span className={`badge ${m[status]||'badge-gray'}`}>{status}</span>;
-};
-
-// ── LOGIN SCREEN ─────────────────────────────────────────────────────────────
-const Login = ({onLogin}) => {
-  const [email,setEmail]=useState('');
-  const [pass,setPass]=useState('');
-  const [err,setErr]=useState('');
-  const [loading,setLoading]=useState(false);
-  const [mode,setMode]=useState('login');
-
-  const handle = async () => {
-    setLoading(true); setErr('');
-    await new Promise(r=>setTimeout(r,800));
-    if(mode==='login'){
-      if(email===OWNER_EMAIL && pass===OWNER_PASS){ onLogin({name:'Yaswanth',email,plan:'Elite',isOwner:true}); }
-      else if(email && pass.length>=6){ onLogin({name:email.split('@')[0],email,plan:'Free',isOwner:false}); }
-      else{ setErr('Invalid email or password (min 6 chars).'); }
-    } else {
-      if(email && pass.length>=6){ onLogin({name:email.split('@')[0],email,plan:'Free',isOwner:false}); }
-      else{ setErr('Please enter a valid email and password (min 6 chars).'); }
-    }
-    setLoading(false);
-  };
-
-  return (
-    <div style={{display:'flex',width:'100vw',height:'100vh',background:'var(--bg)',alignItems:'center',justifyContent:'center'}}>
-      <div style={{position:'fixed',inset:0,background:'radial-gradient(ellipse at 30% 30%, rgba(108,99,255,0.08) 0%, transparent 60%), radial-gradient(ellipse at 70% 70%, rgba(67,232,176,0.05) 0%, transparent 60%)',pointerEvents:'none'}}/>
-      <div style={{width:420,background:'var(--bg2)',border:'1px solid var(--border)',borderRadius:20,padding:36,position:'relative',zIndex:1}}>
-        <div style={{textAlign:'center',marginBottom:28}}>
-          <div style={{width:56,height:56,background:'linear-gradient(135deg,#6c63ff,#ff6584)',borderRadius:14,margin:'0 auto 16px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:24,fontFamily:'var(--font-head)',fontWeight:800,color:'#fff'}}>C</div>
-          <h1 style={{fontFamily:'var(--font-head)',fontSize:26,fontWeight:800,color:'var(--text)'}}>Careerly</h1>
-          <p style={{color:'var(--text3)',fontSize:13,marginTop:4}}>AI-powered career platform</p>
-        </div>
-        <div className="tabs" style={{margin:'0 auto 20px',justifyContent:'center'}}>
-          <div className={`tab ${mode==='login'?'active':''}`} onClick={()=>setMode('login')}>Sign In</div>
-          <div className={`tab ${mode==='signup'?'active':''}`} onClick={()=>setMode('signup')}>Sign Up</div>
-        </div>
-        {err && <div style={{background:'rgba(255,101,132,0.1)',border:'1px solid rgba(255,101,132,0.3)',borderRadius:8,padding:'10px 14px',color:'var(--danger)',fontSize:13,marginBottom:14}}>{err}</div>}
-        <div className="input-group">
-          <label className="input-label">Email address</label>
-          <input type="email" placeholder="you@example.com" value={email} onChange={e=>setEmail(e.target.value)}/>
-        </div>
-        <div className="input-group">
-          <label className="input-label">Password</label>
-          <input type="password" placeholder="••••••••" value={pass} onChange={e=>setPass(e.target.value)} onKeyDown={e=>e.key==='Enter'&&handle()}/>
-        </div>
-        <button className="btn btn-primary btn-lg" style={{width:'100%',justifyContent:'center',marginTop:4}} onClick={handle} disabled={loading}>
-          {loading?<><div className="spinner" style={{width:16,height:16}}/> Loading...</>:(mode==='login'?'Sign In →':'Create Account →')}
-        </button>
-        <p style={{textAlign:'center',fontSize:12,color:'var(--text3)',marginTop:14}}>
-          Owner? Use yaswanth@careerly.co.uk / Careerly@Owner2025
-        </p>
-      </div>
-    </div>
-  );
-};
-
-// ── DASHBOARD ────────────────────────────────────────────────────────────────
-const Dashboard = ({user, apps, onNav}) => {
-  const counts = {Applied:0,Interview:0,Offer:0,Rejected:0};
-  apps.forEach(a=>{ if(counts[a.status]!==undefined) counts[a.status]++; });
-  const upcoming = apps.filter(a=>a.status==='Interview');
-
-  return (
-    <div className="fade-up">
-      <div className="section-hero">
-        <div style={{display:'flex',alignItems:'center',gap:14}}>
-          <div>
-            <h2 style={{fontFamily:'var(--font-head)',fontSize:22,fontWeight:800,color:'var(--text)',marginBottom:4}}>
-              Welcome back, {user.name.charAt(0).toUpperCase()+user.name.slice(1)} {user.isOwner&&<span className="owner-badge">👑 OWNER</span>}
-            </h2>
-            <p style={{color:'var(--text2)',fontSize:14}}>Here's your career overview. Let's land that dream job.</p>
-          </div>
-          <div style={{marginLeft:'auto',display:'flex',gap:10}}>
-            <button className="btn btn-primary btn-sm" onClick={()=>onNav('cv')}>✦ Generate CV</button>
-            <button className="btn btn-secondary btn-sm" onClick={()=>onNav('tracker')}>+ Add Application</button>
-          </div>
-        </div>
-      </div>
-
-      {user.isOwner && (
-        <div style={{background:'linear-gradient(135deg,rgba(255,215,0,0.08),rgba(255,165,0,0.05))',border:'1px solid rgba(255,215,0,0.2)',borderRadius:'var(--radius)',padding:16,marginBottom:20}}>
-          <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:12}}>
-            <span style={{fontSize:18}}>👑</span>
-            <span style={{fontFamily:'var(--font-head)',fontSize:14,fontWeight:700,color:'#FFD700'}}>Owner Dashboard</span>
-          </div>
-          <div className="grid grid-4" style={{gap:10}}>
-            {[['Total Users','1,247'],['MRR','£8,420'],['This Month Signups','183'],['Churn Rate','2.1%']].map(([l,v])=>(
-              <div key={l} style={{background:'rgba(255,215,0,0.06)',border:'1px solid rgba(255,215,0,0.15)',borderRadius:'var(--radius-sm)',padding:'12px 14px'}}>
-                <div style={{fontSize:11,color:'rgba(255,215,0,0.6)',marginBottom:4}}>{l}</div>
-                <div style={{fontFamily:'var(--font-head)',fontSize:20,fontWeight:800,color:'#FFD700'}}>{v}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div className="grid grid-4" style={{marginBottom:20}}>
-        <div className="stat-card stat-accent"><div className="stat-label">Applications</div><div className="stat-value">{apps.length}</div><div className="stat-change stat-up">↑ 3 this week</div></div>
-        <div className="stat-card stat-accent2"><div className="stat-label">Interviews</div><div className="stat-value">{counts.Interview}</div><div className="stat-change stat-up">↑ Active</div></div>
-        <div className="stat-card stat-accent3"><div className="stat-label">Offers</div><div className="stat-value">{counts.Offer}</div><div className="stat-change stat-up">🎉 Great!</div></div>
-        <div className="stat-card stat-warn"><div className="stat-label">Success Rate</div><div className="stat-value">{apps.length?Math.round((counts.Offer/apps.length)*100):0}%</div><div className="stat-change">Overall</div></div>
-      </div>
-
-      <div className="grid grid-2" style={{marginBottom:20}}>
-        <div className="card">
-          <div className="card-header">
-            <span className="card-title">Recent Applications</span>
-            <button className="btn btn-secondary btn-sm" onClick={()=>onNav('tracker')}>View All</button>
-          </div>
-          <table className="table">
-            <thead><tr><th>Company</th><th>Role</th><th>Status</th><th>Match</th></tr></thead>
-            <tbody>
-              {apps.slice(0,4).map(a=>(
-                <tr key={a.id}>
-                  <td style={{fontWeight:500,color:'var(--text)'}}>{a.company}</td>
-                  <td>{a.role}</td>
-                  <td><StatusBadge status={a.status}/></td>
-                  <td><span style={{color:a.match>=85?'var(--accent3)':a.match>=65?'var(--warn)':'var(--danger)',fontWeight:600,fontSize:13}}>{a.match}%</span></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="card">
-          <div className="card-header">
-            <span className="card-title">Upcoming Interviews</span>
-            <button className="btn btn-secondary btn-sm" onClick={()=>onNav('interview')}>Prep Now</button>
-          </div>
-          {upcoming.length===0?(
-            <div className="empty"><div className="empty-icon">🎯</div><p className="empty-text">No interviews scheduled yet.<br/>Keep applying!</p></div>
-          ):upcoming.map(a=>(
-            <div key={a.id} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 0',borderBottom:'1px solid rgba(42,42,56,0.5)'}}>
-              <div>
-                <div style={{fontWeight:500,color:'var(--text)',fontSize:14}}>{a.company}</div>
-                <div style={{color:'var(--text3)',fontSize:12}}>{a.role}</div>
-              </div>
-              <button className="btn btn-success btn-sm" onClick={()=>onNav('interview')}>Prep →</button>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="card">
-        <div className="card-header"><span className="card-title">Application Pipeline</span></div>
-        {['Applied','Interview','Offer','Rejected'].map(s=>(
-          <div key={s} style={{display:'flex',alignItems:'center',gap:12,marginBottom:10}}>
-            <span style={{width:80,fontSize:12,color:'var(--text2)'}}>{s}</span>
-            <div className="progress" style={{flex:1}}>
-              <div className={`progress-bar ${s==='Offer'?'progress-green':s==='Rejected'?'progress-red':s==='Interview'?'progress-warn':'progress-purple'}`}
-                style={{width:`${apps.length?Math.round((counts[s]/apps.length)*100):0}%`}}/>
-            </div>
-            <span style={{width:30,fontSize:12,fontWeight:600,color:'var(--text)',textAlign:'right'}}>{counts[s]}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// ── CV BUILDER ────────────────────────────────────────────────────────────────
-const CVBuilder = () => {
-  const [form,setForm]=useState({name:'',email:'',phone:'',location:'',linkedin:'',summary:'',experience:'',education:'',skills:'',jobTitle:'',jobDesc:'',country:'UK'});
-  const [result,setResult]=useState('');
-  const [loading,setLoading]=useState(false);
-  const [copied,setCopied]=useState(false);
-
-  const gen = async () => {
-    if(!form.name||!form.jobTitle){alert('Please enter your name and target job title.');return;}
-    setLoading(true); setResult('');
-    const prompt = `Create a professional, ATS-optimised CV for ${form.name} applying for ${form.jobTitle} in ${form.country}.
-
-Country standards for ${form.country}: ${form.country==='UK'?'No photo, include personal statement, use British English, reverse chronological':form.country==='US'?'No photo, no age/nationality, objective statement optional, 1-2 pages':form.country==='Germany'?'Include professional photo, detailed personal info, Lebenslauf format':form.country==='India'?'Can include photo, career objective, detailed personal info':form.country==='UAE'?'Professional photo optional, include nationality, UAE-standard format':'Professional international format'}
-
-Candidate Details:
-Name: ${form.name}
-Email: ${form.email}
-Phone: ${form.phone}
-Location: ${form.location}
-LinkedIn: ${form.linkedin}
-Professional Summary: ${form.summary||'Generate based on experience'}
-Work Experience: ${form.experience||'Recent graduate / Entry level'}
-Education: ${form.education}
-Skills: ${form.skills}
-
-Target Job Description: ${form.jobDesc||'General '+form.jobTitle+' position'}
-
-Instructions:
-- Tailor every bullet point to match the job description keywords
-- Use strong action verbs and quantify achievements
-- Include ATS-friendly formatting
-- Follow strict ${form.country} CV standards
-- Make it compelling and professional
-- Format cleanly with clear sections`;
-
-    const r = await askAI(prompt,'You are an expert CV writer with 15 years experience creating CVs for top companies worldwide. You know the exact standards for every country. Create detailed, professional, ATS-optimised CVs.');
-    setResult(r);
-    setLoading(false);
-  };
-
-  const copy = () => {navigator.clipboard.writeText(result);setCopied(true);setTimeout(()=>setCopied(false),2000);};
-
-  return (
-    <div className="fade-up">
-      <div className="section-hero">
-        <h2 style={{fontFamily:'var(--font-head)',fontSize:20,fontWeight:800,color:'var(--text)',marginBottom:4}}>✦ AI CV Builder</h2>
-        <p style={{color:'var(--text2)',fontSize:14}}>Create a country-specific, ATS-optimised CV tailored to any job in seconds.</p>
-      </div>
-      <div className="grid grid-2">
-        <div className="card">
-          <div className="card-header"><span className="card-title">Your Details</span></div>
-          <div className="grid grid-2" style={{gap:10}}>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">Full Name *</label>
-              <input type="text" placeholder="John Smith" value={form.name} onChange={e=>setForm({...form,name:e.target.value})}/>
-            </div>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">Target Job Title *</label>
-              <input type="text" placeholder="Software Engineer" value={form.jobTitle} onChange={e=>setForm({...form,jobTitle:e.target.value})}/>
-            </div>
-          </div>
-          <div style={{height:10}}/>
-          <div className="grid grid-2" style={{gap:10}}>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">Email</label>
-              <input type="email" placeholder="john@email.com" value={form.email} onChange={e=>setForm({...form,email:e.target.value})}/>
-            </div>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">Phone</label>
-              <input type="text" placeholder="+44 7700 900000" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})}/>
-            </div>
-          </div>
-          <div style={{height:10}}/>
-          <div className="grid grid-2" style={{gap:10}}>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">Location</label>
-              <input type="text" placeholder="London, UK" value={form.location} onChange={e=>setForm({...form,location:e.target.value})}/>
-            </div>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">CV Country Standard</label>
-              <select value={form.country} onChange={e=>setForm({...form,country:e.target.value})}>
-                {COUNTRIES.map(c=><option key={c}>{c}</option>)}
-              </select>
-            </div>
-          </div>
-          <div style={{height:10}}/>
-          <div className="input-group">
-            <label className="input-label">LinkedIn URL</label>
-            <input type="text" placeholder="linkedin.com/in/johnsmith" value={form.linkedin} onChange={e=>setForm({...form,linkedin:e.target.value})}/>
-          </div>
-          <div className="input-group">
-            <label className="input-label">Professional Summary</label>
-            <textarea placeholder="Brief summary of your experience and goals..." value={form.summary} onChange={e=>setForm({...form,summary:e.target.value})} style={{minHeight:70}}/>
-          </div>
-          <div className="input-group">
-            <label className="input-label">Work Experience</label>
-            <textarea placeholder="Company, Role, Dates, Key achievements..." value={form.experience} onChange={e=>setForm({...form,experience:e.target.value})} style={{minHeight:80}}/>
-          </div>
-          <div className="input-group">
-            <label className="input-label">Education</label>
-            <textarea placeholder="Degree, University, Year, Grade..." value={form.education} onChange={e=>setForm({...form,education:e.target.value})} style={{minHeight:60}}/>
-          </div>
-          <div className="input-group">
-            <label className="input-label">Skills (comma separated)</label>
-            <input type="text" placeholder="Python, React, SQL, Project Management..." value={form.skills} onChange={e=>setForm({...form,skills:e.target.value})}/>
-          </div>
-          <div className="input-group">
-            <label className="input-label">Target Job Description (paste for better tailoring)</label>
-            <textarea placeholder="Paste the job description here for a perfectly tailored CV..." value={form.jobDesc} onChange={e=>setForm({...form,jobDesc:e.target.value})} style={{minHeight:80}}/>
-          </div>
-          <button className="btn btn-primary btn-lg" style={{width:'100%',justifyContent:'center'}} onClick={gen} disabled={loading}>
-            {loading?<><div className="spinner" style={{width:16,height:16}}/> Generating your CV...</>:<>✦ Generate AI CV for {form.country}</>}
-          </button>
-        </div>
-        <div>
-          {result?(
-            <div className="ai-response fade-up">
-              <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:14}}>
-                <span style={{fontFamily:'var(--font-head)',fontSize:14,fontWeight:700,color:'var(--accent)'}}>Your AI-Generated CV</span>
-                <div style={{display:'flex',gap:8}}>
-                  <button className="btn btn-secondary btn-sm" onClick={copy}>{copied?'✓ Copied!':'⎘ Copy'}</button>
-                  <button className="btn btn-success btn-sm" onClick={gen}>↺ Regenerate</button>
-                </div>
-              </div>
-              <pre style={{fontFamily:'var(--font-body)',fontSize:13,lineHeight:1.8,color:'var(--text)',whiteSpace:'pre-wrap'}}>{result}</pre>
-            </div>
-          ):(
-            <div className="card" style={{height:'100%',minHeight:400,display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column',gap:12}}>
-              <div style={{fontSize:48,opacity:0.2}}>📄</div>
-              <p style={{color:'var(--text3)',fontSize:14,textAlign:'center'}}>Fill in your details and click<br/>"Generate AI CV" to get started</p>
-              <div style={{background:'var(--bg3)',borderRadius:'var(--radius-sm)',padding:'10px 16px',marginTop:8}}>
-                <p style={{fontSize:12,color:'var(--text3)',textAlign:'center'}}>✓ ATS-Optimised &nbsp;·&nbsp; ✓ Country-Specific &nbsp;·&nbsp; ✓ Job-Tailored</p>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// ── COVER LETTER ──────────────────────────────────────────────────────────────
-const CoverLetter = () => {
-  const [form,setForm]=useState({name:'',email:'',company:'',role:'',hiringMgr:'',experience:'',skills:'',jobDesc:'',tone:'Professional',country:'UK'});
-  const [result,setResult]=useState('');
-  const [loading,setLoading]=useState(false);
-
-  const gen = async () => {
-    if(!form.name||!form.company||!form.role){alert('Please fill in name, company and role.');return;}
-    setLoading(true); setResult('');
-    const prompt = `Write a ${form.tone.toLowerCase()} cover letter for ${form.name} applying to ${form.role} at ${form.company} in ${form.country}.
-
-${form.hiringMgr?'Hiring Manager: '+form.hiringMgr:''}
-My Experience: ${form.experience||'Experienced professional'}
-My Key Skills: ${form.skills}
-Job Description: ${form.jobDesc||'General '+form.role+' position at '+form.company}
-
-Requirements:
-- ${form.country} standard cover letter format
-- ${form.tone} tone throughout
-- 3-4 paragraphs: opening hook, value proposition, specific examples, strong close
-- Reference the company's values and culture where possible
-- End with a clear call to action
-- Do NOT use clichés like "I am writing to apply"
-- Make it memorable and compelling`;
-
-    const r = await askAI(prompt,'You are an expert cover letter writer. Write compelling, personalised cover letters that get interviews. Never use generic openers.');
-    setResult(r);
-    setLoading(false);
-  };
-
-  return (
-    <div className="fade-up">
-      <div className="section-hero">
-        <h2 style={{fontFamily:'var(--font-head)',fontSize:20,fontWeight:800,color:'var(--text)',marginBottom:4}}>✦ AI Cover Letter</h2>
-        <p style={{color:'var(--text2)',fontSize:14}}>Generate a personalised, compelling cover letter that gets you noticed.</p>
-      </div>
-      <div className="grid grid-2">
-        <div className="card">
-          <div className="card-header"><span className="card-title">Letter Details</span></div>
-          <div className="grid grid-2" style={{gap:10}}>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">Your Name *</label>
-              <input type="text" placeholder="John Smith" value={form.name} onChange={e=>setForm({...form,name:e.target.value})}/>
-            </div>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">Your Email</label>
-              <input type="email" placeholder="john@email.com" value={form.email} onChange={e=>setForm({...form,email:e.target.value})}/>
-            </div>
-          </div>
-          <div style={{height:10}}/>
-          <div className="grid grid-2" style={{gap:10}}>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">Company Name *</label>
-              <input type="text" placeholder="Google" value={form.company} onChange={e=>setForm({...form,company:e.target.value})}/>
-            </div>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">Job Role *</label>
-              <input type="text" placeholder="Software Engineer" value={form.role} onChange={e=>setForm({...form,role:e.target.value})}/>
-            </div>
-          </div>
-          <div style={{height:10}}/>
-          <div className="grid grid-2" style={{gap:10}}>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">Hiring Manager (optional)</label>
-              <input type="text" placeholder="Ms. Sarah Johnson" value={form.hiringMgr} onChange={e=>setForm({...form,hiringMgr:e.target.value})}/>
-            </div>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">Tone</label>
-              <select value={form.tone} onChange={e=>setForm({...form,tone:e.target.value})}>
-                {['Professional','Enthusiastic','Creative','Executive','Conversational'].map(t=><option key={t}>{t}</option>)}
-              </select>
-            </div>
-          </div>
-          <div style={{height:10}}/>
-          <div className="grid grid-2" style={{gap:10}}>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">Country Standard</label>
-              <select value={form.country} onChange={e=>setForm({...form,country:e.target.value})}>
-                {COUNTRIES.map(c=><option key={c}>{c}</option>)}
-              </select>
-            </div>
-            <div/>
-          </div>
-          <div style={{height:10}}/>
-          <div className="input-group">
-            <label className="input-label">Your Relevant Experience</label>
-            <textarea placeholder="Briefly describe your most relevant experience..." value={form.experience} onChange={e=>setForm({...form,experience:e.target.value})}/>
-          </div>
-          <div className="input-group">
-            <label className="input-label">Key Skills</label>
-            <input type="text" placeholder="Python, Leadership, Data Analysis..." value={form.skills} onChange={e=>setForm({...form,skills:e.target.value})}/>
-          </div>
-          <div className="input-group">
-            <label className="input-label">Job Description</label>
-            <textarea placeholder="Paste the job description for a tailored letter..." value={form.jobDesc} onChange={e=>setForm({...form,jobDesc:e.target.value})}/>
-          </div>
-          <button className="btn btn-primary btn-lg" style={{width:'100%',justifyContent:'center'}} onClick={gen} disabled={loading}>
-            {loading?<><div className="spinner" style={{width:16,height:16}}/> Writing your letter...</>:<>✦ Generate Cover Letter</>}
-          </button>
-        </div>
-        <div>
-          {result?(
-            <div className="ai-response fade-up">
-              <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:14}}>
-                <span style={{fontFamily:'var(--font-head)',fontSize:14,fontWeight:700,color:'var(--accent)'}}>Your Cover Letter</span>
-                <div style={{display:'flex',gap:8}}>
-                  <button className="btn btn-secondary btn-sm" onClick={()=>{navigator.clipboard.writeText(result);}}>⎘ Copy</button>
-                  <button className="btn btn-success btn-sm" onClick={gen}>↺ Regenerate</button>
-                </div>
-              </div>
-              <pre style={{fontFamily:'var(--font-body)',fontSize:13,lineHeight:1.8,color:'var(--text)',whiteSpace:'pre-wrap'}}>{result}</pre>
-            </div>
-          ):(
-            <div className="card" style={{height:'100%',minHeight:400,display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column',gap:12}}>
-              <div style={{fontSize:48,opacity:0.2}}>✉️</div>
-              <p style={{color:'var(--text3)',fontSize:14,textAlign:'center'}}>Fill in the details and generate<br/>your personalised cover letter</p>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// ── TRACKER ───────────────────────────────────────────────────────────────────
-const Tracker = ({apps, setApps}) => {
-  const [filter,setFilter]=useState('All');
-  const [showAdd,setShowAdd]=useState(false);
-  const [newApp,setNewApp]=useState({company:'',role:'',status:'Applied',country:'UK',notes:'',match:''});
-
-  const filtered = filter==='All'?apps:apps.filter(a=>a.status===filter);
-
-  const add = () => {
-    if(!newApp.company||!newApp.role){alert('Company and role required');return;}
-    setApps([...apps,{...newApp,id:Date.now(),date:new Date().toISOString().split('T')[0],match:parseInt(newApp.match)||Math.floor(Math.random()*30+65)}]);
-    setNewApp({company:'',role:'',status:'Applied',country:'UK',notes:'',match:''});
-    setShowAdd(false);
-  };
-
-  const del = (id) => setApps(apps.filter(a=>a.id!==id));
-  const updateStatus = (id,status) => setApps(apps.map(a=>a.id===id?{...a,status}:a));
-
-  return (
-    <div className="fade-up">
-      <div className="section-hero">
-        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-          <div>
-            <h2 style={{fontFamily:'var(--font-head)',fontSize:20,fontWeight:800,color:'var(--text)',marginBottom:4}}>Application Tracker</h2>
-            <p style={{color:'var(--text2)',fontSize:14}}>Track every application, interview, and offer in one place.</p>
-          </div>
-          <button className="btn btn-primary" onClick={()=>setShowAdd(true)}>+ Add Application</button>
-        </div>
-      </div>
-
-      <div style={{display:'flex',gap:8,marginBottom:16,flexWrap:'wrap'}}>
-        {['All',...STATUS_OPTIONS].map(s=>(
-          <button key={s} className={`btn btn-sm ${filter===s?'btn-primary':'btn-secondary'}`} onClick={()=>setFilter(s)}>
-            {s} {s==='All'?apps.length:apps.filter(a=>a.status===s).length}
-          </button>
-        ))}
-      </div>
-
-      <div className="card" style={{padding:0,overflow:'hidden'}}>
-        <table className="table">
-          <thead><tr><th>Company</th><th>Role</th><th>Country</th><th>Match</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
-          <tbody>
-            {filtered.length===0?(
-              <tr><td colSpan={7} style={{textAlign:'center',padding:30,color:'var(--text3)'}}>No applications yet. Add your first one!</td></tr>
-            ):filtered.map(a=>(
-              <tr key={a.id}>
-                <td style={{fontWeight:500,color:'var(--text)'}}>{a.company}</td>
-                <td>{a.role}</td>
-                <td><span className="badge badge-gray">{a.country}</span></td>
-                <td><span style={{fontWeight:700,fontSize:13,color:a.match>=85?'var(--accent3)':a.match>=65?'var(--warn)':'var(--danger)'}}>{a.match}%</span></td>
-                <td>
-                  <select value={a.status} onChange={e=>updateStatus(a.id,e.target.value)} style={{width:'auto',padding:'4px 8px',fontSize:12}}>
-                    {STATUS_OPTIONS.map(s=><option key={s}>{s}</option>)}
-                  </select>
-                </td>
-                <td style={{color:'var(--text3)',fontSize:12}}>{a.date}</td>
-                <td><button className="btn btn-danger btn-sm" onClick={()=>del(a.id)}>✕</button></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {showAdd&&(
-        <div className="modal-backdrop" onClick={e=>e.target===e.currentTarget&&setShowAdd(false)}>
-          <div className="modal fade-up">
-            <button className="modal-close" onClick={()=>setShowAdd(false)}>✕</button>
-            <h3 style={{fontFamily:'var(--font-head)',fontSize:18,fontWeight:700,marginBottom:20}}>Add Application</h3>
-            <div className="grid grid-2" style={{gap:12}}>
-              <div className="input-group" style={{margin:0}}>
-                <label className="input-label">Company *</label>
-                <input type="text" placeholder="Google" value={newApp.company} onChange={e=>setNewApp({...newApp,company:e.target.value})}/>
-              </div>
-              <div className="input-group" style={{margin:0}}>
-                <label className="input-label">Job Role *</label>
-                <input type="text" placeholder="Software Engineer" value={newApp.role} onChange={e=>setNewApp({...newApp,role:e.target.value})}/>
-              </div>
-              <div className="input-group" style={{margin:0}}>
-                <label className="input-label">Status</label>
-                <select value={newApp.status} onChange={e=>setNewApp({...newApp,status:e.target.value})}>
-                  {STATUS_OPTIONS.map(s=><option key={s}>{s}</option>)}
-                </select>
-              </div>
-              <div className="input-group" style={{margin:0}}>
-                <label className="input-label">Country</label>
-                <select value={newApp.country} onChange={e=>setNewApp({...newApp,country:e.target.value})}>
-                  {COUNTRIES.map(c=><option key={c}>{c}</option>)}
-                </select>
-              </div>
-            </div>
-            <div className="input-group" style={{marginTop:12}}>
-              <label className="input-label">Notes</label>
-              <textarea placeholder="Any notes about this application..." value={newApp.notes} onChange={e=>setNewApp({...newApp,notes:e.target.value})} style={{minHeight:60}}/>
-            </div>
-            <div style={{display:'flex',gap:10,marginTop:16}}>
-              <button className="btn btn-primary btn-lg" style={{flex:1,justifyContent:'center'}} onClick={add}>Add Application</button>
-              <button className="btn btn-secondary" onClick={()=>setShowAdd(false)}>Cancel</button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-// ── INTERVIEW PREP ────────────────────────────────────────────────────────────
-const InterviewPrep = () => {
-  const [form,setForm]=useState({company:'',role:'',jobDesc:'',experience:'Intermediate',interviewType:'Mixed'});
-  const [questions,setQuestions]=useState([]);
-  const [loading,setLoading]=useState(false);
-  const [answerIdx,setAnswerIdx]=useState(null);
-  const [answer,setAnswer]=useState('');
-  const [answerLoading,setAnswerLoading]=useState(false);
-
-  const genQuestions = async () => {
-    if(!form.company||!form.role){alert('Please enter company and role.');return;}
-    setLoading(true); setQuestions([]);
-    const prompt = `Generate 9 interview questions for a ${form.experience} level ${form.role} position at ${form.company}.
-
-Interview type: ${form.interviewType}
-Job Description: ${form.jobDesc||'General '+form.role+' role'}
-
-Give exactly 9 questions:
-- 3 Behavioural (STAR method)
-- 3 Technical/Role-specific  
-- 3 Company-specific (research ${form.company}'s values, products, recent news)
-
-Format as JSON array: [{"type":"Behavioural","question":"..."},...]
-Only return the JSON array, nothing else.`;
-
-    const r = await askAI(prompt,'You are an expert interview coach. Generate realistic, challenging interview questions that companies actually ask. Return only valid JSON.');
-    try {
-      const clean = r.replace(/```json|```/g,'').trim();
-      const qs = JSON.parse(clean);
-      setQuestions(Array.isArray(qs)?qs:[]);
-    } catch {
-      const lines = r.split('\n').filter(l=>l.includes('?'));
-      setQuestions(lines.slice(0,9).map((q,i)=>({type:i<3?'Behavioural':i<6?'Technical':'Company',question:q.replace(/^\d+\.\s*/,'')})));
-    }
-    setLoading(false);
-  };
-
-  const genAnswer = async (q,i) => {
-    setAnswerIdx(i); setAnswer(''); setAnswerLoading(true);
-    const r = await askAI(`Give a strong sample answer to this interview question for ${form.role} at ${form.company}:\n\n"${q}"\n\nUse STAR method where appropriate. Be specific and compelling. 150-200 words.`,'You are an expert interview coach helping candidates give outstanding answers.');
-    setAnswer(r); setAnswerLoading(false);
-  };
-
-  const typeColor = {Behavioural:'badge-purple',Technical:'badge-warn','Company':'badge-green'};
-
-  return (
-    <div className="fade-up">
-      <div className="section-hero">
-        <h2 style={{fontFamily:'var(--font-head)',fontSize:20,fontWeight:800,color:'var(--text)',marginBottom:4}}>🎯 Interview Preparation</h2>
-        <p style={{color:'var(--text2)',fontSize:14}}>Get AI-generated questions tailored to your exact role, company and interview type.</p>
-      </div>
-      <div className="grid grid-2" style={{marginBottom:20}}>
-        <div className="card">
-          <div className="card-header"><span className="card-title">Interview Setup</span></div>
-          <div className="grid grid-2" style={{gap:10}}>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">Company *</label>
-              <input type="text" placeholder="Google" value={form.company} onChange={e=>setForm({...form,company:e.target.value})}/>
-            </div>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">Job Role *</label>
-              <input type="text" placeholder="Software Engineer" value={form.role} onChange={e=>setForm({...form,role:e.target.value})}/>
-            </div>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">Experience Level</label>
-              <select value={form.experience} onChange={e=>setForm({...form,experience:e.target.value})}>
-                {['Entry-level','Intermediate','Senior','Leadership'].map(l=><option key={l}>{l}</option>)}
-              </select>
-            </div>
-            <div className="input-group" style={{margin:0}}>
-              <label className="input-label">Interview Type</label>
-              <select value={form.interviewType} onChange={e=>setForm({...form,interviewType:e.target.value})}>
-                {['Mixed','Technical','Behavioural','Case Study','HR Screen'].map(t=><option key={t}>{t}</option>)}
-              </select>
-            </div>
-          </div>
-          <div className="input-group" style={{marginTop:10}}>
-            <label className="input-label">Job Description (for tailored questions)</label>
-            <textarea placeholder="Paste the job description here..." value={form.jobDesc} onChange={e=>setForm({...form,jobDesc:e.target.value})} style={{minHeight:80}}/>
-          </div>
-          <button className="btn btn-primary btn-lg" style={{width:'100%',justifyContent:'center'}} onClick={genQuestions} disabled={loading}>
-            {loading?<><div className="spinner" style={{width:16,height:16}}/> Generating questions...</>:<>🎯 Generate Interview Questions</>}
-          </button>
-        </div>
-        <div className="card" style={{display:'flex',flexDirection:'column',gap:8}}>
-          <div className="card-title" style={{marginBottom:4}}>Interview Tips</div>
-          {[['Research','Study {company}\'s recent news, products, financials and culture','badge-purple'],
-            ['STAR Method','Structure behavioural answers: Situation, Task, Action, Result','badge-green'],
-            ['Questions to Ask','Always prepare 3-5 thoughtful questions for your interviewer','badge-warn'],
-            ['Body Language','Firm handshake, eye contact, sit up straight, smile genuinely','badge-gray'],
-            ['Salary','Research market rate on Glassdoor before discussing compensation','badge-purple']
-          ].map(([t,d,b])=>(
-            <div key={t} style={{display:'flex',gap:10,padding:'8px 0',borderBottom:'1px solid rgba(42,42,56,0.4)'}}>
-              <span className={`badge ${b}`} style={{alignSelf:'flex-start',whiteSpace:'nowrap'}}>{t}</span>
-              <span style={{fontSize:13,color:'var(--text2)'}}>{d.replace('{company}',form.company||'the company')}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {questions.length>0&&(
-        <div className="fade-up">
-          <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:14}}>
-            <h3 style={{fontFamily:'var(--font-head)',fontSize:16,fontWeight:700,color:'var(--text)'}}>{questions.length} Questions for {form.company}</h3>
-            <button className="btn btn-secondary btn-sm" onClick={genQuestions}>↺ Regenerate</button>
-          </div>
-          {questions.map((q,i)=>(
-            <div key={i} className="q-card">
-              <div className="q-type">
-                <span className={`badge ${typeColor[q.type]||'badge-gray'}`}>{q.type}</span>
-              </div>
-              <p className="q-text">{q.question}</p>
-              <div className="q-actions">
-                <button className="btn btn-primary btn-sm" onClick={()=>genAnswer(q.question,i)} disabled={answerIdx===i&&answerLoading}>
-                  {answerIdx===i&&answerLoading?<><div className="spinner" style={{width:12,height:12}}/> Writing...</>:'✦ Craft my answer'}
-                </button>
-              </div>
-              {answerIdx===i&&answer&&(
-                <div style={{marginTop:12,background:'rgba(108,99,255,0.06)',border:'1px solid rgba(108,99,255,0.15)',borderRadius:8,padding:14}}>
-                  <div style={{fontSize:11,fontWeight:700,color:'var(--accent)',marginBottom:8,letterSpacing:'0.05em'}}>✦ SUGGESTED ANSWER</div>
-                  <p style={{fontSize:13,color:'var(--text)',lineHeight:1.8}}>{answer}</p>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
-
-// ── LINKEDIN AGENT ────────────────────────────────────────────────────────────
-const LinkedInAgent = ({user}) => {
-  const [active,setActive]=useState(false);
-  const [stats,setStats]=useState({sent:0,opened:0,replied:0});
-  const [form,setForm]=useState({role:'',minMatch:75,dailyLimit:10,message:''});
-  const [msgLoading,setMsgLoading]=useState(false);
-  const [msg,setMsg]=useState('');
-  const isPro = user.isOwner||user.plan==='Pro'||user.plan==='Elite';
-
-  useEffect(()=>{
-    if(active){
-      const t=setInterval(()=>{
-        setStats(s=>({sent:Math.min(s.sent+1,form.dailyLimit),opened:Math.min(s.opened+Math.round(Math.random()),s.sent),replied:Math.min(s.replied+(Math.random()>0.7?1:0),s.opened)}));
-      },2500);
-      return ()=>clearInterval(t);
-    }
-  },[active,form.dailyLimit]);
-
-  const genMsg = async () => {
-    if(!form.role){alert('Enter target role first');return;}
-    setMsgLoading(true);
-    const r = await askAI(`Write a short, personalised LinkedIn connection request message for a recruiter looking for a ${form.role}. Be friendly, professional, and specific. Under 300 characters.`,'You are an expert at LinkedIn outreach. Write concise, human messages that get responses.');
-    setMsg(r); setMsgLoading(false);
-  };
-
-  if(!isPro) return (
-    <div className="fade-up">
-      <div className="section-hero" style={{textAlign:'center',padding:40}}>
-        <div style={{fontSize:48,marginBottom:12}}>🔒</div>
-        <h2 style={{fontFamily:'var(--font-head)',fontSize:22,fontWeight:800,color:'var(--text)',marginBottom:8}}>LinkedIn Agent — Pro Feature</h2>
-        <p style={{color:'var(--text2)',marginBottom:20}}>Automatically reach out to recruiters, personalise messages with AI, and track responses.</p>
-        <button className="btn btn-primary btn-lg">Upgrade to Pro — £29/mo</button>
-      </div>
-    </div>
-  );
-
-  return (
-    <div className="fade-up">
-      <div className="section-hero">
-        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-          <div>
-            <h2 style={{fontFamily:'var(--font-head)',fontSize:20,fontWeight:800,color:'var(--text)',marginBottom:4}}>💼 LinkedIn Agent</h2>
-            <p style={{color:'var(--text2)',fontSize:14}}>Automatically reach out to recruiters with AI-personalised messages.</p>
-          </div>
-          <button className={`btn btn-lg ${active?'btn-danger':'btn-success'}`} onClick={()=>setActive(!active)}>
-            {active?'⏹ Stop Agent':'▶ Start Agent'}
-          </button>
-        </div>
-      </div>
-
-      {active&&(
-        <div style={{background:'rgba(67,232,176,0.06)',border:'1px solid rgba(67,232,176,0.2)',borderRadius:'var(--radius)',padding:16,marginBottom:16,display:'flex',alignItems:'center',gap:10}}>
-          <div className="spinner" style={{borderTopColor:'var(--accent3)'}}/>
-          <span style={{color:'var(--accent3)',fontSize:14,fontWeight:500}}>Agent running — reaching out to recruiters for {form.role||'your target role'}...</span>
-        </div>
-      )}
-
-      <div className="grid grid-3" style={{marginBottom:20}}>
-        <div className="stat-card stat-accent"><div className="stat-label">Messages Sent</div><div className="stat-value">{stats.sent}</div></div>
-        <div className="stat-card stat-accent3"><div className="stat-label">Opened</div><div className="stat-value">{stats.opened}</div></div>
-        <div className="stat-card stat-accent2"><div className="stat-label">Replied</div><div className="stat-value">{stats.replied}</div></div>
-      </div>
-
-      <div className="grid grid-2">
-        <div className="card">
-          <div className="card-header"><span className="card-title">Agent Settings</span></div>
-          <div className="input-group">
-            <label className="input-label">Target Role</label>
-            <input type="text" placeholder="Software Engineer" value={form.role} onChange={e=>setForm({...form,role:e.target.value})}/>
-          </div>
-          <div className="input-group">
-            <label className="input-label">Min Match Score: {form.minMatch}%</label>
-            <input type="range" min="50" max="99" value={form.minMatch} onChange={e=>setForm({...form,minMatch:+e.target.value})} style={{width:'100%'}}/>
-          </div>
-          <div className="input-group">
-            <label className="input-label">Daily Message Limit: {form.dailyLimit}</label>
-            <input type="range" min="5" max="50" value={form.dailyLimit} onChange={e=>setForm({...form,dailyLimit:+e.target.value})} style={{width:'100%'}}/>
-          </div>
-        </div>
-        <div className="card">
-          <div className="card-header">
-            <span className="card-title">AI Message Template</span>
-            <button className="btn btn-primary btn-sm" onClick={genMsg} disabled={msgLoading}>
-              {msgLoading?<div className="spinner" style={{width:12,height:12}}/>:'✦ Generate'}
-            </button>
-          </div>
-          {msg?(
-            <div style={{background:'var(--bg3)',borderRadius:'var(--radius-sm)',padding:14,fontSize:13,color:'var(--text)',lineHeight:1.7}}>{msg}</div>
-          ):(
-            <div className="empty"><div className="empty-icon" style={{fontSize:28}}>💬</div><p className="empty-text">Click Generate to create an AI personalised outreach message</p></div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// ── PRICING ───────────────────────────────────────────────────────────────────
-const Pricing = ({user}) => (
-  <div className="fade-up">
-    <div style={{textAlign:'center',marginBottom:32}}>
-      <h2 style={{fontFamily:'var(--font-head)',fontSize:28,fontWeight:800,color:'var(--text)',marginBottom:8}}>Simple, Transparent Pricing</h2>
-      <p style={{color:'var(--text2)',fontSize:15}}>Join thousands landing their dream jobs with Careerly</p>
-    </div>
-    <div className="grid grid-4">
-      {PLANS.map(p=>(
-        <div key={p.name} className={`plan-card ${p.featured?'featured':''}`}>
-          {p.featured&&<div className="plan-popular">Most Popular</div>}
-          <div style={{fontFamily:'var(--font-head)',fontSize:16,fontWeight:700,color:'var(--text)'}}>{p.name}</div>
-          <div className="plan-price">{p.price}</div>
-          <div className="plan-period">{p.period}</div>
-          <ul className="plan-features">
-            {p.features.map(f=><li key={f}>{f}</li>)}
-          </ul>
-          <button className={`btn btn-lg ${p.featured?'btn-primary':'btn-secondary'}`} style={{width:'100%',justifyContent:'center',marginTop:8}}
-            onClick={()=>p.stripeLink&&p.stripeLink!=='#'&&window.open(p.stripeLink,'_blank')}>
-            {p.btn}
-          </button>
-        </div>
-      ))}
-    </div>
-    <div style={{textAlign:'center',marginTop:28,color:'var(--text3)',fontSize:13}}>
-      <p>Built by Yaswanth · CEO & Founder, Careerly · <a href="mailto:yaswanth@careerly.co.uk" style={{color:'var(--accent)',textDecoration:'none'}}>yaswanth@careerly.co.uk</a></p>
-      <p style={{marginTop:4}}>Secure payments via Stripe · Cancel anytime · 7-day money back guarantee</p>
-    </div>
-  </div>
-);
-
-// ── MAIN APP ──────────────────────────────────────────────────────────────────
-const NAV = [
-  {id:'dashboard',label:'Dashboard',icon:'dashboard',section:'main'},
-  {id:'cv',label:'CV Builder',icon:'cv',section:'main'},
-  {id:'cover',label:'Cover Letter',icon:'cover',section:'main'},
-  {id:'tracker',label:'App Tracker',icon:'tracker',section:'main'},
-  {id:'interview',label:'Interview Prep',icon:'interview',section:'main'},
-  {id:'linkedin',label:'LinkedIn Agent',icon:'linkedin',section:'pro',pro:true},
-  {id:'pricing',label:'Pricing & Plans',icon:'pricing',section:'account'},
-];
-
-const TITLES = {dashboard:'Dashboard',cv:'CV Builder',cover:'Cover Letter',tracker:'Application Tracker',interview:'Interview Prep',linkedin:'LinkedIn Agent',pricing:'Pricing'};
-
-export default function App() {
-  const [user,setUser]=useState(null);
-  const [page,setPage]=useState('dashboard');
-  const [apps,setApps]=useState(SAMPLE_APPS);
-
-  if(!user) return <Login onLogin={setUser}/>;
-
-  const renderPage = () => {
-    switch(page){
-      case 'dashboard': return <Dashboard user={user} apps={apps} onNav={setPage}/>;
-      case 'cv': return <CVBuilder/>;
-      case 'cover': return <CoverLetter/>;
-      case 'tracker': return <Tracker apps={apps} setApps={setApps}/>;
-      case 'interview': return <InterviewPrep/>;
-      case 'linkedin': return <LinkedInAgent user={user}/>;
-      case 'pricing': return <Pricing user={user}/>;
-      default: return <Dashboard user={user} apps={apps} onNav={setPage}/>;
-    }
-  };
-
-  return (
-    <div id="root">
-      <div className="sidebar">
-        <div className="logo">
-          <div className="logo-mark">
-            <div className="logo-icon">C</div>
-            <div>
-              <div className="logo-text">Careerly</div>
-              <div className="logo-sub">AI Career Platform</div>
-            </div>
-          </div>
-        </div>
-        <nav className="nav">
-          <div className="nav-section">Main</div>
-          {NAV.filter(n=>n.section==='main').map(n=>(
-            <div key={n.id} className={`nav-item ${page===n.id?'active':''}`} onClick={()=>setPage(n.id)}>
-              <span className="nav-icon"><Icon name={n.icon}/></span>
-              {n.label}
-              {n.id==='tracker'&&apps.filter(a=>a.status==='Interview').length>0&&(
-                <span className="nav-badge">{apps.filter(a=>a.status==='Interview').length}</span>
-              )}
-            </div>
-          ))}
-          <div className="nav-section" style={{marginTop:8}}>Pro</div>
-          {NAV.filter(n=>n.section==='pro').map(n=>(
-            <div key={n.id} className={`nav-item ${page===n.id?'active':''}`} onClick={()=>setPage(n.id)}>
-              <span className="nav-icon"><Icon name={n.icon}/></span>
-              {n.label}
-              {!user.isOwner&&user.plan==='Free'&&<span className="nav-badge" style={{background:'var(--accent2)'}}>Pro</span>}
-            </div>
-          ))}
-          <div className="nav-section" style={{marginTop:8}}>Account</div>
-          {NAV.filter(n=>n.section==='account').map(n=>(
-            <div key={n.id} className={`nav-item ${page===n.id?'active':''}`} onClick={()=>setPage(n.id)}>
-              <span className="nav-icon"><Icon name={n.icon}/></span>
-              {n.label}
-            </div>
-          ))}
-        </nav>
-        <div className="sidebar-footer">
-          <div className="user-card">
-            <div className="avatar">{user.name.charAt(0).toUpperCase()}</div>
-            <div className="user-info">
-              <div className="user-name">{user.name} {user.isOwner&&<span className="owner-badge">👑</span>}</div>
-              <div className="user-plan">{user.isOwner?'Owner · Elite Access':user.plan+' Plan'}</div>
-            </div>
-            <button style={{background:'none',border:'none',color:'var(--text3)',cursor:'pointer',fontSize:16}} onClick={()=>setUser(null)} title="Sign out">↩</button>
-          </div>
-        </div>
-      </div>
-      <div className="main">
-        <div className="topbar">
-          <span className="page-title">{TITLES[page]}</span>
-          <div className="topbar-actions">
-            {!user.isOwner&&user.plan==='Free'&&(
-              <button className="btn btn-primary btn-sm" onClick={()=>setPage('pricing')}>⚡ Upgrade</button>
-            )}
-            <span style={{fontSize:13,color:'var(--text3)'}}>✦ AI Ready</span>
-          </div>
-        </div>
-        <div className="content">
-          {renderPage()}
-        </div>
-      </div>
-    </div>
-  );
+  document.getElementById("cvResult").innerText =
+  "CV for " + name + " applying for " + job + "\\n\\n(Sample AI Output)";
 }
 
-const container = document.getElementById('root');
-ReactDOM.createRoot(container).render(<App/>);
+function generateCover(){
+  const name = document.getElementById("cname").value;
+  const company = document.getElementById("company").value;
+
+  document.getElementById("coverResult").innerText =
+  "Cover Letter\\n\\nDear " + company + ",\\n\\nMy name is " + name;
+}
+
+let apps = [];
+
+function addApp(){
+  const comp = document.getElementById("comp").value;
+  const role = document.getElementById("role").value;
+
+  apps.push(comp + " - " + role);
+
+  document.getElementById("list").innerHTML =
+    apps.map(a => "<li>"+a+"</li>").join("");
+}
+
+render();
 </script>
+
 </body>
 </html>
