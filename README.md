@@ -1,0 +1,2 @@
+# careerly
+AI Career Platform
