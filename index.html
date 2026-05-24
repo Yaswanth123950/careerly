@@ -63,8 +63,15 @@ function App() {
       return e("h2", null, "✉️ Cover Letter Section");
     }
 
-    if(page === "tracker"){
-      return e("h2", null, "📊 Tracker Section");
+   if(page === "tracker"){
+  return e("div", null,
+    e("h2", null, "📊 Application Tracker"),
+
+    e("input", {placeholder:"Company"}),
+    e("input", {placeholder:"Role"}),
+    
+    e("button", {onClick:()=>alert("Added!")}, "Add Application")
+  );
     }
   }
 
