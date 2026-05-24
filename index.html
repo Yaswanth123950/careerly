@@ -5,7 +5,8 @@
 <title>Careerly</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="https://unpkg.com/react@18/umd/unpkg.com React@18 UMD"></script>
+<!-- ✅ FIXED script links -->
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
 <style>
@@ -14,7 +15,21 @@ body { margin:0; background:#0a0a0f; color:white; font-family:Arial;}
 .sidebar { width:220px; background:#111; padding:20px;}
 .main { flex:1; padding:20px;}
 .container { display:flex; height:100%;}
-button { padding:10px; margin:5px; background:#6c63ff; color:white; border:none; cursor:pointer;}
+
+button {
+  padding:10px;
+  margin:5px;
+  background:#6c63ff;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+
+input {
+  display:block;
+  margin:10px 0;
+  padding:8px;
+}
 </style>
 </head>
 
@@ -28,28 +43,28 @@ function App() {
   const [page, setPage] = React.useState("dashboard");
 
   function renderPage(){
-    if(page==="dashboard"){
+    if(page === "dashboard"){
       return e("div", null,
         e("h1", null, "🚀 Careerly Advanced App"),
         e("p", null, "Now React is working without black screen ✅")
       );
     }
 
-    if(page==="cv"){
+    if(page === "cv"){
       return e("div", null,
         e("h2", null, "CV Builder"),
-        e("input", {placeholder:"Name"}),
+        e("input", {placeholder:"Your Name"}),
         e("input", {placeholder:"Job Title"}),
         e("button", null, "Generate CV")
       );
     }
 
-    if(page==="cover"){
-      return e("h2", null, "Cover Letter Section");
+    if(page === "cover"){
+      return e("h2", null, "✉️ Cover Letter Section");
     }
 
-    if(page==="tracker"){
-      return e("h2", null, "Tracker Section");
+    if(page === "tracker"){
+      return e("h2", null, "📊 Tracker Section");
     }
   }
 
@@ -59,7 +74,7 @@ function App() {
       e("button",{onClick:()=>setPage("dashboard")},"Dashboard"),
       e("button",{onClick:()=>setPage("cv")},"CV Builder"),
       e("button",{onClick:()=>setPage("cover")},"Cover Letter"),
-      e("button",{onClick:()=>setPage("tracker")},"Tracker"),
+      e("button",{onClick:()=>setPage("tracker")},"Tracker")
     ),
     e("div",{className:"main"},
       renderPage()
